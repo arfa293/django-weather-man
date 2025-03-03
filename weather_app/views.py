@@ -1,38 +1,50 @@
+
 from django.http import HttpResponse
 from django.shortcuts import render
 from .classes import Fileparser,Calculation
 import os
 
 def index(request):
-    year = 2012
-    month = 6
-    fp = Fileparser()
-    files = fp.get_files_by_year(year)
-    total_data = []
-    required_columns = ["PKT" or "PKST","Max TemperatureC", "Min TemperatureC", "Max Humidity",  "Min Humidity", "Mean Humidity"]
+    year = int(request.GET.get("year", 2024)) 
+    month = int(request.GET.get("month", 1))  
+
+    parser = Fileparser()
+    files = parser.get_files_by_year(year)
+    
+    all_data = []
+    required_columns = ["PKT", "PKST", "Max TemperatureC", "Min TemperatureC", "Max Humidity", "Min Humidity", "Mean Humidity"]
+    
     for file in files:
-        data = fp.get_file_data(to_read=file, required_columns=required_columns)
-        total_data = total_data + data
-    # print(total_data)
-    print(fp.formatdata(extracted_data=total_data))
-    fz=Calculation(total_data)
-    fg=fz.get_min_temperature()
-    fx=fz.get_max_temperature()
-    print(fg)
-    print(fx)
-    fr=fz.get_max_huimidity()
-    print(fr)
-    fn = fz.get_min_huimidity()
-    print(fn)
-    gh=fz.average_max_temperature(year,month)
-    print(f"average monthly max temp: {gh} C")
-    gf=fz.average_min_temp(year,month)
-    print(f"average monthly min temp: {gf} C")
-    gd=fz.average_mean_humidity(year,month)
-    print(f"average monthly mean humidity: {gd} %")    
+        all_data.extend(parser.get_file_data(file, required_columns))
 
+    calc = Calculation(all_data)
+    
+    avg_max_temp = calc.average_max_temperature(year, month)
+    avg_min_temp = calc.average_min_temp(year, month)
 
-    return HttpResponse()
+    
+    highest_temp = calc.get_max_temperature()  
+    lowest_temp = calc.get_min_temperature()  
+    most_humid_day = calc.get_max_huimidity()  
 
-def yearly_report(request):
-    return render (request,'weatherreport.html')
+    
+    avg_max_temp = int(avg_max_temp) if isinstance(avg_max_temp, (int, float)) else 0
+    avg_min_temp = int(avg_min_temp) if isinstance(avg_min_temp, (int, float)) else 0
+
+    
+    max_temp_stars = "*" * avg_max_temp
+    min_temp_stars = "*" * avg_min_temp
+
+    context = {
+        "year": year,
+        "month": month,
+        "avg_max_temp": avg_max_temp,
+        "avg_min_temp": avg_min_temp,
+        "max_temp_stars": max_temp_stars,
+        "min_temp_stars": min_temp_stars,
+        "highest_temp": highest_temp,
+        "lowest_temp": lowest_temp,
+        "most_humid_day": most_humid_day,
+    }
+
+    return render(request, "weather_report.html", context)

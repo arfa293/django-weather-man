@@ -1,4 +1,4 @@
-PKST,Max TemperatureC,Mean TemperatureC,Min TemperatureC,Dew PointC,MeanDew PointC,Min DewpointC,Max Humidity, Mean Humidity, Min Humidity, Max Sea Level PressurehPa, Mean Sea Level PressurehPa, Min Sea Level PressurehPa, Max VisibilityKm, Mean VisibilityKm, Min VisibilitykM, Max Wind SpeedKm/h, Mean Wind SpeedKm/h, Max Gust SpeedKm/h,Precipitationmm, CloudCover, Events,WindDirDegrees
+PKT,Max TemperatureC,Mean TemperatureC,Min TemperatureC,Dew PointC,MeanDew PointC,Min DewpointC,Max Humidity, Mean Humidity, Min Humidity, Max Sea Level PressurehPa, Mean Sea Level PressurehPa, Min Sea Level PressurehPa, Max VisibilityKm, Mean VisibilityKm, Min VisibilitykM, Max Wind SpeedKm/h, Mean Wind SpeedKm/h, Max Gust SpeedKm/h,Precipitationmm, CloudCover, Events,WindDirDegrees
 2009-5-1,25,20,16,7,4,2,30,26,21,,,,10.0,7.0,4.0,9,2,,0.0,,,-1
 2009-5-2,24,20,15,8,4,1,29,25,21,,,,10.0,7.0,4.0,6,1,,0.0,,,-1
 2009-5-3,21,18,13,8,4,-4,62,34,15,,,,10.0,5.5,4.0,9,6,,4.0,8,Rain,-1

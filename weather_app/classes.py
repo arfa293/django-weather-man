@@ -56,7 +56,7 @@ class Fileparser:
                 try:
                     extracted_data.append(
                         WeatherData(
-                            date=row[column_indices["PKT"] or ["PKST"]],
+                            date=row[column_indices["PKT"] ],
                             max_temperature=row[column_indices["Max TemperatureC"]],
                             min_temperature=row[column_indices["Min TemperatureC"]],
                             max_humidity=row[column_indices["Max Humidity"]],
@@ -173,30 +173,10 @@ class Calculation:
                 return "no data avalible"
             return round(sum(average_mean)/len(average_mean),2)
     
-class WeatherReports:
-    def generate_yearly_report(self,year):
-         # set data folder path
-        parser = Fileparser(filepath="data") 
-        data = parser.readfiles(year)  
-        if not data:
-            print(f"No data available for {year}")
-            return
+    def bar_chart(self, average_max, average_min):
+        # Ensure values are integers before multiplying
+        if not isinstance(average_max, int) or not isinstance(average_min, int):
+            raise TypeError("average_max and average_min must be integers")
 
-        calc = Calculation(data)
-
-        # Yearly max temperature
-        max_temp, max_temp_date = calc.get_max_value("Max_temperature")
-        
-        # Yearly min temperature
-        min_temp, min_temp_date = calc.get_min_value("Min_temperature")
-        
-        # Yearly max humidity
-        max_humidity, max_humidity_date = calc.get_max_value("Max_Humidity")
-
-        # Print the yearly report
-        # print(f"\nYearly Weather Report for {year}")
-        # print(f"--------------------------------")
-        # print(f"Hottest Day  : {max_temp_date} with {max_temp}°C")
-        # print(f"Coldest Day  : {min_temp_date} with {min_temp}°C")
-        # print(f"Most Humid Day: {max_humidity_date} with {max_humidity}% humidity")
-        # print(f"--------------------------------\n")  
+        print(f"Avg Max Temperature ({average_max}°C): {'*' * average_max}")
+        print(f"Avg Min Temperature ({average_min}°C): {'*' * average_min}")
