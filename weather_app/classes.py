@@ -1,7 +1,6 @@
 import os 
 import csv
 from django.conf import settings
-
 from dataclasses import dataclass
 from datetime import datetime
 
