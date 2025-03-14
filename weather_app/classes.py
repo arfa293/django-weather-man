@@ -1,7 +1,6 @@
 import os 
 import csv
 from django.conf import settings
-
 from dataclasses import dataclass
 from datetime import datetime
 
@@ -177,6 +176,9 @@ class Calculation:
         # Ensure values are integers before multiplying
         if not isinstance(average_max, int) or not isinstance(average_min, int):
             raise TypeError("average_max and average_min must be integers")
-
         print(f"Avg Max Temperature ({average_max}°C): {'*' * average_max}")
         print(f"Avg Min Temperature ({average_min}°C): {'*' * average_min}")
+
+
+
+
