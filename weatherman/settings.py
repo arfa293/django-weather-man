@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'weather_app'
 
 ]
 
@@ -99,6 +100,10 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+LOGIN_URL = "/login/"  
+LOGIN_REDIRECT_URL = "/weather-form/"  
+LOGOUT_REDIRECT_URL = "/login/"  
 
 
 # Internationalization
