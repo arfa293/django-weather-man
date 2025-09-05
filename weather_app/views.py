@@ -46,5 +46,5 @@ def index(request):
         "lowest_temp": lowest_temp,
         "most_humid_day": most_humid_day,
     }
-
+    
     return render(request, "weather_report.html", context)
